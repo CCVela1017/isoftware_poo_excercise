@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import PostRegister from "@/utils/posts-register";
 import PostGetAll from "@/utils/posts-getall";
 import PostUpdate from "@/utils/posts-update";
+import PostDelete from "@/utils/posts-delete";
 import PostgresPostsRepository from "@/utils/postgres-posts-repository";
 
 const repository = new PostgresPostsRepository();
@@ -49,6 +50,24 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to update post" },
+      { status: 400 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const data = await request.json();
+    const id = data.id;
+    const deletePost = new PostDelete(repository);
+    await deletePost.run(id);
+
+    return NextResponse.json(
+      { message: "Post deleted successfully" }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete post" },
       { status: 400 }
     );
   }

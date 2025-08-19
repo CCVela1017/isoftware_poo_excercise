@@ -1,0 +1,15 @@
+import PostRepository from "./posts-repository";
+
+
+
+
+export default class PostDelete {
+  private readonly repository: PostRepository;
+  constructor(repository: PostRepository) {
+    this.repository = repository;
+  }
+  
+  public async run(id: number): Promise<void> {
+    await this.repository.delete(id);
+  }
+}
