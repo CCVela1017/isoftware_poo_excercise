@@ -26,10 +26,11 @@ export default class Post {
   public static create(
     title: string,
     description: string,
-    author: string 
+    author: string,
+    id?: number
   ) {
     const post = new Post(
-      undefined, 
+      id, 
       new PostTitle(title),
       new PostDescription(description),
       new PostAuthor(author)
