@@ -1,6 +1,9 @@
 import PostRepository from "./posts-repository";
 import Post from "./posts";
 
+
+
+
 export default class InMemoryPostsRepository implements PostRepository {
   private posts: Array<{
     title: string,
@@ -24,4 +27,9 @@ export default class InMemoryPostsRepository implements PostRepository {
     });
   }
 
+  public async getAll(): Promise<Post[]> {
+    return this.posts.map((post, index) => {
+      return Post.create(post.title, post.description, post.author);
+    });
+  }
 }

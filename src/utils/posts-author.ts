@@ -1,3 +1,4 @@
+
 export default class PostAuthor {
   public value: string;
 
